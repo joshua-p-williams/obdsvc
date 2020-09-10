@@ -12,12 +12,13 @@ authors = ["Joshua Williams <joshua.p.williams@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 click = "^7.1.2"
+obd = "^0.7.1"
 
 [tool.poetry.dev-dependencies]
 
+[tool.poetry.scripts]
+obdsvc = "obdsvc.console:main"
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
 
-[tool.poetry.scripts]
-obdsvc = "obdsvc.console:main"

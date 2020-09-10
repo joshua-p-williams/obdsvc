@@ -6,8 +6,36 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "7.1.2"
 
+[[package]]
+category = "main"
+description = "Serial module for handling live sensor data from a vehicle's OBD-II port"
+name = "obd"
+optional = false
+python-versions = "*"
+version = "0.7.1"
+
+[package.dependencies]
+pint = ">=0.7.0,<0.8.0"
+pyserial = ">=3.0.0,<4.0.0"
+
+[[package]]
+category = "main"
+description = "Physical quantities module"
+name = "pint"
+optional = false
+python-versions = "*"
+version = "0.7.2"
+
+[[package]]
+category = "main"
+description = "Python Serial Port Extension"
+name = "pyserial"
+optional = false
+python-versions = "*"
+version = "3.4"
+
 [metadata]
-content-hash = "b1b1bb53d123259d2b558768e987412f6f31a5b6e6af22d0b5338f72390d14a8"
+content-hash = "bc47c1ed69f7a0420d0217c0597709c11230217cf1882fd71be371153231ee74"
 lock-version = "1.0"
 python-versions = "^3.8"
 
@@ -15,4 +43,14 @@ python-versions = "^3.8"
 click = [
     {file = "click-7.1.2-py2.py3-none-any.whl", hash = "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"},
     {file = "click-7.1.2.tar.gz", hash = "sha256:d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a"},
+]
+obd = [
+    {file = "obd-0.7.1.tar.gz", hash = "sha256:8b81ea5896157b6e861af12e173c10b001cb6cca6ebb04db2c01d326812ad77b"},
+]
+pint = [
+    {file = "Pint-0.7.2.tar.gz", hash = "sha256:38b97d352a6376bb4e957095c8b75c1c2aa8edbf9a7ccf058d69b147862e77ad"},
+]
+pyserial = [
+    {file = "pyserial-3.4-py2.py3-none-any.whl", hash = "sha256:e0770fadba80c31013896c7e6ef703f72e7834965954a78e71a3049488d4d7d8"},
+    {file = "pyserial-3.4.tar.gz", hash = "sha256:6e2d401fdee0eab996cf734e67773a0143b932772ca8b42451440cfed942c627"},
 ]

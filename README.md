@@ -1,5 +1,14 @@
 # obdsvc
 
+# Dependencies
+
+* [Click (Command Line Creation Kit)](https://click.palletsprojects.com/)
+* [python-OBD](https://python-obd.readthedocs.io/en/latest/)
+
+# References
+
+* [Hypermodern Python](https://medium.com/@cjolowicz/hypermodern-python-d44485d9d769)
+
 # Building From Scratch
 
 Python versioning is done via [pyenv](https://github.com/pyenv/pyenv).
@@ -87,4 +96,10 @@ poetry run obdsvc
 
 # View usage
 poetry run obdsvc --help
+```
+
+The OBD support is provided by [python-OBD](https://python-obd.readthedocs.io/en/latest/).
+
+```bash
+poetry add obd
 ```
