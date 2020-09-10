@@ -50,3 +50,41 @@ poetry install
 # Test the environment
 poetry run python
 ```
+
+This is a command line app, using the [Click (Command Line Creation Kit)](https://click.palletsprojects.com/).
+
+```bash
+# Initially install the dependency
+poetry add click
+
+# Can later be updated to the latest minor version
+poetry update click
+
+# Update to a newer major version by running
+poetry add click^7.0
+```
+
+See console app in `console.py`.
+
+Register the app in poetry by adding to the `pyproject.toml`.
+
+```TOML
+[tool.poetry.scripts]
+obdsvc = "obdsvc.console:main"
+```
+
+Install the package in the virtual environment
+
+```bash
+poetry install
+```
+
+Run the app in teh virtual environment with;
+
+```bash
+# Run the app with
+poetry run obdsvc
+
+# View usage
+poetry run obdsvc --help
+```
