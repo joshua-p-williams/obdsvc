@@ -1,5 +1,9 @@
 # obdsvc
 
+# Development / Testing Environment
+
+[ELM327-Emulator](https://github.com/ircama/ELM327-emulator) was used to emulate the ELM327 OBD-II adapter connected to a vehicle.
+
 # Dependencies
 
 * [Click (Command Line Creation Kit)](https://click.palletsprojects.com/)
