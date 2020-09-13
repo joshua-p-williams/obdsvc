@@ -1,9 +1,9 @@
 import click
-import obd
 import time
 
 from . import __version__
 from . import automobile
+from . import redispub
 
 @click.command()
 
@@ -13,26 +13,29 @@ from . import automobile
 @click.option('--fast', default=True, help='Allows commands to be optimized before being sent to the car. Disabling fast mode will guarantee that python-OBD outputs the unaltered command for every request.')
 @click.option('--timeout', default=0.1, help='Specifies the connection timeout in seconds.')
 @click.option('--checkvoltage', default=True, help='Optional argument that is True by default and when set to False disables the detection of the car supply voltage on OBDII port (which should be about 12V). This control assumes that, if the voltage is lower than 6V, the OBDII port is disconnected from the car. If the option is enabled, it adds the OBDStatus.OBD_CONNECTED status, which is set when enough voltage is returned (socket connected to the car) but the ignition is off (no communication with the vehicle). Setting the option to False should be needed when the adapter does not support the voltage pin or more generally when the hardware provides unreliable results, or if the pin reads the switched ignition voltage rather than the battery positive (this depends on the car).')
+@click.option('--redishost', default='localhost', help='The redis host.')
 
 @click.version_option(version=__version__)
 
-def main(port, baudrate, protocol, fast, timeout, checkvoltage):
+def main(port, baudrate, protocol, fast, timeout, checkvoltage, redishost):
   """A service to relay OBD2 info onto a seperate application message bus."""
 
+  # Create a connection with the car
   car = automobile.Automobile(port, baudrate, protocol, fast, timeout, checkvoltage)
+  redis = redispub.RedisPub(redishost)
 
+  # Set up the commands we want to query the car about
   car.addCommands([
     'RPM', 
     {'command': 'SPEED', 'convertTo': 'mph'}, 
     {'name': 'ENGINE_TEMP', 'command': 'COOLANT_TEMP', 'convertTo': 'degF'}, 
   ])
 
+  # Main loop where we continually query the car
   while (1):
     responses = car.query()
     for name in list(responses):
       response = responses[name]['result']
-      print(response)
-      
-    print("")
-    print("")
-    time.sleep(5)
+      redis.publishResponse(name, response)
+
+    time.sleep(.5)

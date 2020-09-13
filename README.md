@@ -107,3 +107,41 @@ The OBD support is provided by [python-OBD](https://python-obd.readthedocs.io/en
 ```bash
 poetry add obd
 ```
+
+We will also publish the OBD data onto redis via pubsub, so add redis.
+
+```bash
+poetry add redis
+```
+
+To run a temporary redis server;
+
+```bash
+docker run --name redis-obd -p 6379:6379 -d redis
+```
+
+You can then run the program;
+
+```bash
+poetry run obdsvc --port='/dev/pts/1'
+```
+
+You can then connect to the redis container
+
+```bash
+docker exec -it redis-obd sh
+```
+
+Onced connected to the container, open the redis-cli and view the cache or subscribe to the channel
+
+```bash
+get RPM
+subscribe RPM
+```
+
+To close and run the container.
+
+```bash
+docker container stop redis-obd
+docker container rm redis-obd
+```

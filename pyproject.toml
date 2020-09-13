@@ -13,6 +13,7 @@ authors = ["Joshua Williams <joshua.p.williams@gmail.com>"]
 python = "^3.8"
 click = "^7.1.2"
 obd = "^0.7.1"
+redis = "^3.5.3"
 
 [tool.poetry.dev-dependencies]
 
